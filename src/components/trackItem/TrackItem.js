@@ -16,10 +16,14 @@ const TrackItem = (props) => {
                         <strong> <i className="fas fa-compact-disc" /> Album </strong> : {track.album_name}
                     </div>
                 </div>
+                <Link
+                    to={`lyric/track/${track.track_id}`}
+                >
                     <span className='track-btn'>View Lyrics</span>
+                </Link>
             </div>
         </div>
-    )
+    );
 }
 
 export default TrackItem

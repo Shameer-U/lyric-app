@@ -36,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "projectConfig": {
+    "apiKey": "368b2deb35cda00eba43469e43991489"
   }
 }

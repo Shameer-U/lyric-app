@@ -1,10 +1,15 @@
+import axios from 'axios';
 import { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
+const config = require('../../package.json');
+
+const API_KEY = config.projectConfig.apiKey
 
 // Initial state
 const initialState = {
    tracks: [],
-   selected_track: {}
+   selected_lyrics: '',
+   selected_track_details: {}
 }
 
 // Create context
@@ -18,7 +23,7 @@ export const GlobalProvider = ({ children }) => {
   const fetchTracks = () => {
     let trackList = [];
 
-    // fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=1&page_size=10&country=in&f_has_lyrics=1&apikey=368b2deb35cda00eba43469e43991489`)
+    // fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=1&page_size=10&country=in&f_has_lyrics=1&apikey=${API_KEY}`)
     // .then(res => {
     //     return res.json();
     // })
@@ -240,11 +245,101 @@ export const GlobalProvider = ({ children }) => {
       dispatch({type: 'FETCH_TRACKS', payload: trackList});
   }
 
+  const fetchLyrics = async (id) => {
+    let lyrics = '';
+    let trackDetails = {};
+
+    try {
+            // const res = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${id}&apikey=${API_KEY}`)
+            // const response = await res.json()
+
+            // if (response.message.header.status_code === 200) {
+            //   lyrics = response.message.body.lyrics.lyrics_body;
+            // }
+
+            lyrics = "ವರಾಹ ರೂಪಂ ದೈವ ವರಿಷ್ಟಂ\nವರಾಹ ರೂಪಂ ದೈವ ವರಿಷ್ಟಂ\nವರಸ್ಮಿತ ವದನಂ\nವಜ್ರ ದಂತಧರ ರಕ್ಷಾ ಕವಚಂ\n\nಶಿವ ಸಂಭೂತ ಭುವಿ ಸಂಜಾತ\nನಂಬಿದವ ಗಿಂಬು ಕೊಡುವವನೀತ\nಸಾವಿರ ದೈವದ ಮನ ಸಂಪ್ರೀತ\n...\n\n******* This Lyrics is NOT for Commercial use *******\n(1409622888986)";
+
+            dispatch({type: 'FETCH_LYRICS', payload: lyrics});
+
+            // fetch(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.get?track_id=${id}&apikey=${API_KEY}`)
+            // .then(res => {
+            //       return res.json();
+            //   })
+            //   .then(res => {
+            //       console.log('track_details', res);
+            //       if (res.message.header.status_code === 200) {
+            //         trackDetails = res.message.body.track;
+            //       }
+
+            //       dispatch({type: 'FETCH_TRACK_DETAILS', payload: trackDetails});
+            //   })
+            //   .catch(err => {
+            //       console.log('error',err);
+            //       dispatch({type: 'FETCH_TRACK_DETAILS', payload: trackDetails});
+            //     }
+            //   );
+
+          trackDetails = {
+              "track_id": 243160581,
+              "track_name": "Summer High",
+              "track_name_translation_list": [],
+              "track_rating": 83,
+              "commontrack_id": 149425088,
+              "instrumental": 0,
+              "explicit": 0,
+              "has_lyrics": 1,
+              "has_subtitles": 1,
+              "has_richsync": 1,
+              "num_favourite": 25,
+              "album_id": 53376781,
+              "album_name": "Summer High - Single",
+              "artist_id": 51617343,
+              "artist_name": "AP Dhillon",
+              "track_share_url": "https://www.musixmatch.com/lyrics/AP-Dhillon-1/Summer-High?utm_source=application&utm_campaign=api&utm_medium=None%3A1409622888986",
+              "track_edit_url": "https://www.musixmatch.com/lyrics/AP-Dhillon-1/Summer-High/edit?utm_source=application&utm_campaign=api&utm_medium=None%3A1409622888986",
+              "restricted": 0,
+              "updated_time": "2022-10-29T09:31:28Z",
+              "primary_genres": {
+                  "music_genre_list": [
+                      {
+                          "music_genre": {
+                              "music_genre_id": 15,
+                              "music_genre_parent_id": 34,
+                              "music_genre_name": "R&B/Soul",
+                              "music_genre_name_extended": "R&B/Soul",
+                              "music_genre_vanity": "R-B-Soul"
+                          }
+                      },
+                      {
+                          "music_genre": {
+                              "music_genre_id": 18,
+                              "music_genre_parent_id": 34,
+                              "music_genre_name": "Hip Hop/Rap",
+                              "music_genre_name_extended": "Hip-Hop/Rap",
+                              "music_genre_vanity": "Hip-Hop-Rap"
+                          }
+                      }
+                  ]
+              }
+          };
+
+          dispatch({type: 'FETCH_TRACK_DETAILS', payload: trackDetails});
+    }
+    catch (err) {
+        console.log(err);
+        dispatch({type: 'FETCH_LYRICS', payload: lyrics});
+        dispatch({type: 'FETCH_TRACK_DETAILS', payload: trackDetails});
+    }
+  }
+
   return (
     <GlobalContext.Provider value={
                                     {
                                         tracks: state.tracks,
+                                        selected_track_details: state.selected_track_details,
+                                        selected_lyrics: state.selected_lyrics,
                                         fetchTracks,
+                                        fetchLyrics
                                     }
                                   }
     >
