@@ -1,0 +1,24 @@
+.track-item {
+    flex: 1 1 400px;
+    max-width: 500px;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+.track-body {
+    flex: 1 1 auto;
+    padding: 20px;
+}
+
+.track-details {
+    margin: 20px 0;
+}
+
+.track-btn {
+    padding: 5px 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 20px;
+}
