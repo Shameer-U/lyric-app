@@ -2,7 +2,7 @@ export default (state, action) => {
     switch(action.type) {
       case 'FETCH_TRACKS':
         return {
-          ...state, tracks: action.payload
+          ...state, tracks: action.payload.trackList, search: action.payload.search
         }
       case 'FETCH_LYRICS':
         return {

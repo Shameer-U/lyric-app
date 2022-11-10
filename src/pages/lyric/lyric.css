@@ -1,0 +1,27 @@
+.lyric-container {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 5px;
+}
+
+.lyric-header {
+    background-color: rgba(0,0,0,.03);
+    padding: 20px;
+}
+
+.lyric-body {
+    padding: 20px;
+}
+
+.track-detail ul li {
+    border-top: 1px solid rgba(0,0,0,.125);
+    padding: 10px;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #111;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
