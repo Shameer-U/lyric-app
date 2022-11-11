@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin: 20px 0 20px 0;
+    margin: 20px 0 40px 0;
 }
 
 .search-bar {
@@ -18,9 +18,14 @@
 
 .search-bar  form  input{
     width: 400px;
+    border: 2px solid #5c2336;
     border-right: none;
     border-radius: 5px 0 0 5px;
     padding: 5px;
+}
+
+.search-bar  form  input:focus-visible{
+    outline: #5c2336 auto 1px;
 }
 
 .search-bar form  button {
@@ -28,8 +33,20 @@
     font-size: 20px;
     cursor: pointer;
     height: 38px;
-    background-color: #111;
+    background-color: #5c2336;
     color: #fff;
     border-radius: 0 5px 5px 0;
+    border:1px solid #5c2336;
 
+}
+
+.search-bar form button:hover {
+   background-color: #5c2336;
+   border-color: #5c2336;
+}
+
+@media (max-width:500px) {
+    .search-bar  form  input{
+        width: 250px;
+    }
 }

@@ -1,8 +1,10 @@
 .nav-container {
-    background-color: #111;
+    background-color: #5c2336;
     padding: 20px;
 }
 
 .nav-container span {
     color: #fff;
+    font-size: 20px;
+    font-weight: 500;
 }

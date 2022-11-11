@@ -4,10 +4,11 @@ import { GlobalContext } from '../../context/GlobalState';
 import './lyric.css';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import Spinner from '../../components/spinner/Spinner';
 
 const Lyric = () => {
     const { id } = useParams();
-    const { fetchLyrics, selected_lyrics, selected_track_details } = useContext(GlobalContext);
+    const { fetchLyrics, selected_lyrics, selected_track_details, status, fetching } = useContext(GlobalContext);
 
     useEffect(() => {
         fetchLyrics(id);
@@ -15,14 +16,15 @@ const Lyric = () => {
 
     return (
         <>
+            {fetching && <Spinner />}
             <Link to="/" className="back-btn">
                 Go Back
             </Link>
 
             <div className="lyric-container">
-                <h5 className="lyric-header">
+                <h3 className="lyric-header">
                     {selected_track_details?.track_name} by <span className="text-secondary">{selected_track_details?.artist_name}</span>
-                </h5>
+                </h3>
                 <div className="lyric-body">
                     <p className="lyric-text">{selected_lyrics}</p>
                 </div>

@@ -20,7 +20,7 @@ const Search = () => {
     return (
         <div className="search-container">
             <h1>
-                <i className="fas fa-music" /> Search For A Song
+                <i className="fas fa-music" style={{color:'#23415c'}}/> Search For A Song
             </h1>
             <p>Get the lyrics for any song</p>
             <div className='search-bar'>

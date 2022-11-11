@@ -17,3 +17,9 @@ ul {
    max-width: 1030px;
    margin: 0 auto;
 }
+
+@media(max-width:500px) {
+   .app-container {
+      padding:0 10px;
+   }
+}

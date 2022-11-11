@@ -5,20 +5,52 @@
     border-radius: 5px;
 }
 
+.track-heading {
+    height: 70px;
+    background-color: #5c2336; 
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    align-items: center;
+}
+
 .track-body {
     flex: 1 1 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .track-details {
-    margin: 20px 0;
+
+}
+
+.track-details div {
+   padding: 10px 0;
 }
 
 .track-btn {
     padding: 5px 10px;
-    border: 1px solid red;
+    border: 2px solid #5c2336;
+    background-color: transparent;
+    color: #111;
     border-radius: 5px;
     cursor: pointer;
     display: inline-block;
     margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.track-btn:hover {
+    background-color: #5c2336;
+    color: #fff;
+}
+
+@media(max-width:500px) {
+    .track-item {
+        flex-basis: 300px;
+    }
 }

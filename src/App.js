@@ -9,16 +9,16 @@ function App() {
   
   return (
       <GlobalProvider>
-        <Navbar />
-        <div className='app-container'>
-          <BrowserRouter>
-            <Routes>
-                <Route path="/"  element={ <Home /> } />
-                <Route path="/lyric/track/:id" element={ <Lyric /> } />
-            </Routes>
-          </BrowserRouter>
-        </div>
-      </GlobalProvider>
+        <BrowserRouter>
+          <Navbar />
+            <div className='app-container'>
+              <Routes>
+                  <Route path="/"  element={ <Home /> } />
+                  <Route path="/lyric/track/:id" element={ <Lyric /> } />
+              </Routes>
+            </div>
+        </BrowserRouter>
+    </GlobalProvider>
   );
 }
 
