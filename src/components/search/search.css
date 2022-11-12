@@ -18,14 +18,14 @@
 
 .search-bar  form  input{
     width: 400px;
-    border: 2px solid #5c2336;
+    border: 2px solid #008987;
     border-right: none;
     border-radius: 5px 0 0 5px;
     padding: 5px;
 }
 
 .search-bar  form  input:focus-visible{
-    outline: #5c2336 auto 1px;
+    outline: #008987 auto 1px;
 }
 
 .search-bar form  button {
@@ -33,16 +33,16 @@
     font-size: 20px;
     cursor: pointer;
     height: 38px;
-    background-color: #5c2336;
+    background-color: #008987;
     color: #fff;
     border-radius: 0 5px 5px 0;
-    border:1px solid #5c2336;
+    border:1px solid #008987;
 
 }
 
 .search-bar form button:hover {
-   background-color: #5c2336;
-   border-color: #5c2336;
+   background-color: #008987;
+   border-color: #008987;
 }
 
 @media (max-width:500px) {

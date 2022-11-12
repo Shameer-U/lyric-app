@@ -4,7 +4,7 @@
 }
 
 .lyric-header {
-    background-color: #5c2336;
+    background-color: #008987;
     color: #fff;
     padding: 20px;
     border-radius: 5px 5px 0 0;
@@ -22,7 +22,7 @@
 .back-btn {
     display: inline-block;
     padding: 5px 10px;
-    border: 2px solid #5c2336;
+    border: 2px solid #008987;
     background-color: transparent;
     color: #111;
     border-radius: 5px;
@@ -32,6 +32,6 @@
 }
 
 .back-btn:hover {
-    background-color: #5c2336;
+    background-color: #008987;
     color: #fff;
 }
