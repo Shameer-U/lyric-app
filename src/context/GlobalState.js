@@ -67,6 +67,8 @@ export const GlobalProvider = ({ children }) => {
     let lyrics = '';
     let trackDetails = {};
 
+    dispatch({type: 'FETCH_LYRICS', payload: {lyrics:'', status:true, fetching:true} });
+
     try {
             const res = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${id}&apikey=${process.env.REACT_APP_API_KEY}`)
             const response = await res.json();
@@ -74,35 +76,41 @@ export const GlobalProvider = ({ children }) => {
             if (response.message.header.status_code === 200) {
               lyrics = response.message.body.lyrics.lyrics_body;
               dispatch({type: 'FETCH_LYRICS', payload: {lyrics, status:true, fetching:false} });
+
+              dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails: {}, status:true, fetching:true} });
+
+              fetch(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.get?track_id=${id}&apikey=${process.env.REACT_APP_API_KEY}`)
+              .then(res => {
+                    return res.json();
+                })
+                .then(res => {
+                    if (res.message.header.status_code === 200) {
+                      trackDetails = res.message.body.track;
+                      dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails, status:true, fetching:false}});
+                    } else {
+                      dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails, status:false, fetching:false}});
+                    }
+
+                    
+                })
+                .catch(err => {
+                    console.log('fetchLyrics-error',err);
+                    dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails, status:false, fetching:false}});
+                });
             } else {
               dispatch({type: 'FETCH_LYRICS', payload: {lyrics, status:false, fetching:false} });
             }
 
-
-            fetch(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.get?track_id=${id}&apikey=${process.env.REACT_APP_API_KEY}`)
-            .then(res => {
-                  return res.json();
-              })
-              .then(res => {
-                  if (res.message.header.status_code === 200) {
-                    trackDetails = res.message.body.track;
-                    dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails, status:true, fetching:false}});
-                  } else {
-                     dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails, status:true, fetching:false}});
-                  }
-
-                  
-              })
-              .catch(err => {
-                  console.log('fetchLyrics-error',err);
-                  dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails, status:false, fetching:false}});
-              });
-    }
-    catch (err) {
+    } catch (err) {
         console.log('fetchLyrics-error', err);
         dispatch({type: 'FETCH_LYRICS', payload: {lyrics, status:false, fetching:false} });
         dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails, status:false, fetching:false} });
     }
+  }
+
+  const removeLyrics = () => {
+      dispatch({type: 'FETCH_LYRICS', payload: {lyrics:'', status:false, fetching:false} });
+      dispatch({type: 'FETCH_TRACK_DETAILS', payload: {trackDetails: {}, status:false, fetching:false} });
   }
 
   return (
@@ -117,6 +125,7 @@ export const GlobalProvider = ({ children }) => {
                                         fetchTracks,
                                         searchTracks,
                                         fetchLyrics,
+                                        removeLyrics
                                     }
                                   }
     >

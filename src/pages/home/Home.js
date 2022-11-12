@@ -24,13 +24,15 @@ function Home() {
             )
           }
           <div className='home-container'>
-              {(status && tracks.length > 0 ) ?  tracks?.map(item => (
+              {!fetching ? (
+                (status && tracks.length > 0 ) ?  tracks?.map(item => (
                       <TrackItem key={item.track.track_id} track={item.track} />
                   )) : (
                 <div className='error'>
                   <h4>Data not available</h4>
                 </div>
                 )
+                ) : null
               }
           </div>
         </section>
